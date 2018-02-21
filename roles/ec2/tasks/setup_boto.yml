@@ -1,0 +1,13 @@
+---
+
+- name: Install python pip
+  yum: name={{ item }} state=present
+  sudo: True
+  with_items:
+    - python-pip
+  
+- name: Install boto
+  command: pip install {{ item }}
+  sudo: True
+  with_items:
+     - boto

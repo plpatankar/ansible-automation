@@ -1,0 +1,75 @@
+---
+
+# ec2
+ec2-ssh-timeout: 30
+instance_type: t2.micro
+# Change the security group name here
+security_group: "{{ sg_group.group_name }}"
+# This is an amazon AMI
+image: ami-55ef662f
+# This is one of my keys that i already have in AWS
+keypair: Key001 
+# Change the Region
+region: us-east-1 
+count: 1
+
+# For volume to be added in instance
+instance_volumes:
+    - device_name: /dev/xvda
+      volume_type: gp2
+      volume_size: 8
+
+# For volume to be mounted from snapshot
+#instance_volumes:
+#    - device_name: /dev/sdb
+#      snapshot: snap-abcdef12
+#      volume_size: 10
+
+zone: us-east-1a
+vpc_subnet: "{{ ansible_subnet.subnet.id }}"
+# host.ini file path where you want new ips to be inserted into
+hosts_ini_file: "inventory/hosts.ini"
+# tags to be added to newly created instances
+host_tag: 
+   group: webserver
+   source: ansible
+
+# tag name of the hosts under which ips to be added under ini file
+hosts_tag_group: "webserver"
+# list public ip in ini file True/False
+public_ip_in_ini: False
+
+## V P C  V A R S
+vpc_cidr_block: "10.10.0.0/16"
+vpc_tenancy: default
+vpc_name: "ansible_vpc"
+vpc_region: "{{ region }}"
+
+## S U B N E T   V A R S
+subnet_cidr: "10.10.0.0/24"
+subnet_vpc: "{{ ansible_vpc.vpc.id }}"
+subnet_region: "{{ region }}"
+subnet_public_ip: true
+
+## S E C U R I T Y  G R O U P  V A R S
+sg_name: "ansible_SG"
+sg_region: "{{ region }}"
+sg_vpc: "{{ ansible_vpc.vpc.id }}"
+
+sg_inbound_rules:
+    - proto: tcp
+      from_port: 22
+      to_port: 22
+      cidr_ip: '0.0.0.0/0'
+    - proto: tcp
+      from_port: 8080 
+      to_port: 8080
+      cidr_ip: '0.0.0.0/0'
+    - proto: tcp
+      from_port: 443
+      to_port: 443
+      cidr_ip: '0.0.0.0/0'
+
+sg_outbound_rules:
+    - proto: all
+      cidr_ip: '0.0.0.0/0'
