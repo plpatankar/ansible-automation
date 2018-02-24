@@ -1,0 +1,10 @@
+---
+
+# Users to be created 
+
+user_list:
+# - { name: testuser1, uid: 1002, groups: "wheel, staff" }
+ - { name: ansible, uid: 1001, groups: "ansible" }
+ - { name: oracleweb, uid: 1002, groups: "webinstall" }
+
+ec2-key: "Key001.pem"

@@ -1,0 +1,12 @@
+---
+- name: Setup common tasks for server provisioning
+  hosts: webserver
+  gather_facts: false
+  become: yes
+  become_method: sudo
+#  pre_tasks:
+#    - { include: roles/jenkin/tasks/yum_update_cache.yml, tags: [ 'cache' ] }
+  roles:
+      - { role: common }
+
+
