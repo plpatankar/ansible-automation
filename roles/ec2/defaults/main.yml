@@ -38,6 +38,8 @@ host_tag:
 hosts_tag_group: "webserver"
 # list public ip in ini file True/False
 public_ip_in_ini: False
+# ec2 key
+ec2_key: "Key001.pem"
 
 ## V P C  V A R S
 vpc_cidr_block: "10.10.0.0/16"

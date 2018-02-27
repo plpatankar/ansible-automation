@@ -24,6 +24,14 @@
 #    insertafter="\[{{host_tag.group}}\]" line={{ item.public_ip }}
 #  with_items: "{{ ec2.instances }}"
 
+
+# set host_ip_addr to public ip if specified else private ip as default
+#- name: Get IP of newly created instance
+#  set_fact: 
+#    host_ip_addr: "{% if public_ip_in_ini %} {{ item.public_ip }} {% else %} {{ item.private_ip }} {% endif %}"
+#  with_items: "{{ ec2.instances }}"
+  
+
 - name: Add public ip of the newly created EC2 instance(s) to the local host group (located inside the directory)
   local_action: lineinfile
     dest={{ hosts_ini_file }}
@@ -42,10 +50,25 @@
   when: public_ip_in_ini is not defined or public_ip_in_ini == False
 
 
-- name: setup SSH Key
-  shell: sh setup_key.sh "{{ inventory_hostname }}" "{{ ec2-key }}"
-  register: result
-  ignore_errors: True
+#- name: setup SSH Key
+#  shell: "sh {{ role_path }}/files/setup_key.sh {{ ec2_key }} {{ item }}"
+#  register: result
+#  with_items: 
+#     - "{{ groups['all'] }}"
+#  tags: 
+#     - setup_ssh
+#  ignore_errors: True
+
+- name: Create ansible user if not exists
+  user:
+     name: ansible
+     home: "/home/ansible"
+     generate_ssh_key: yes
+     state: present
+     ssh_key_bits: 2048
+     ssh_key_file: .ssh/id_rsa
+  sudo: true
+
 
 
 #- name: Wait for SSH to come up
