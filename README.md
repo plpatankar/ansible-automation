@@ -6,7 +6,8 @@ Requirement:
 ( Note: python-pip and boto3 will be installed by playbook ) 
 
 Running entire playbook will create vpc,subnet,security group along with ec2 instances. 
-### playbook to run:
+# playbook to run:
+## ansible_ec2_provisioning.yml: 
 ```shell
 ansible-playbook -i inventory/hosts.ini ansible_ec2_provisioning.yml -e@ec2-key.yml --ask-vault-pass
 
@@ -121,6 +122,13 @@ Further any provising configurations playbooks can executed over this dymanic in
 
 Limitations:
  - need to use existing ssh key for ec2, no playbook to create key.
+ 
+## setup_ssh.yml:
+This playbook can be used to setup password less ssh on each of the hosts/instances listed in inventory file. We will need to pass initial private key and the user which is used to provision the VM. Ansible playbook will use 'ansible' user to run the playbooks. 
+```shell
+ansible-playbook -i inventory/hosts.ini setup_ssh.yml --private-key=Key001.pem -u ec2-user
+
+```
 
 ## Authors
 
