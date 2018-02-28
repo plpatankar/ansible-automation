@@ -67,7 +67,9 @@
      state: present
      ssh_key_bits: 2048
      ssh_key_file: .ssh/id_rsa
-  sudo: true
+  become: yes
+  become_method: "sudo"
+
 
 
 

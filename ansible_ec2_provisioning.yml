@@ -1,6 +1,7 @@
 ---
 - name: Provision an EC2 Instance
   hosts: local
+  user: root
   connection: local
   pre_tasks:
     - { include: roles/ec2/tasks/setup_boto.yml, tags: [ 'provisioning', 'setupboto' ] }
