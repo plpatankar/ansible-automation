@@ -1,0 +1,36 @@
+---
+# local ansible user must be created with ssh key before running this playbook
+- hosts: all
+  user: ec2-user
+  vars: 
+    createuser: 'ansible'
+  tasks:
+  - name: Create ansible user
+    user:
+       name: "{{ createuser }}"
+       home: "/home/{{ createuser }}"
+       state: present
+    become: yes
+    become_method: "sudo"
+
+  - name: Setup | authorized key upload
+    authorized_key: 
+      user: "{{ createuser }}"
+      key: "{{ lookup('file', '/home/{{ createuser }}/.ssh/id_rsa.pub') }}"
+      path: "/home/{{ createuser }}/.ssh/authorized_keys"
+      manage_dir: false
+      state: present
+    become: yes
+    become_method: "sudo"
+ 
+  - name: Sudoers | update sudoers file and validate
+    lineinfile: 
+      path: /etc/sudoers
+      insertafter: EOF
+      line: '{{ createuser }}        ALL=(ALL)       NOPASSWD: ALL'
+      regexp: '{{ createuser }}        ALL=(ALL)       NOPASSWD: ALL'
+      state: present
+    become: yes
+    become_method: "sudo"
+
+

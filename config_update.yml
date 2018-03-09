@@ -2,7 +2,23 @@
 ## Add varaibles/configurations that needs to be overriden from defalut 
 
 # ec2
-security_group: ansible_SG
+ec2-ssh-timeout: 30
+instance_type: t2.micro
+# Change the security group name here
+security_group: "ppp-security-group"
+# This is an amazon AMI
+image: ami-26ebbc5c
+# This is one of my keys that i already have in AWS
+keypair: Key001
+# Change the Region
+region: us-east-1
+count: 1
+zone: us-east-1a
+vpc_subnet: "subnet-aaa4fef0"
+hosts_ini_file: "inventory/hosts.ini"
+host_tag:
+   name: webserver
+   source: ansible
 
 # VPC
 

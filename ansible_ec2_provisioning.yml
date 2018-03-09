@@ -2,12 +2,25 @@
 - name: Provision an EC2 Instance
   hosts: local
   connection: local
+  become: yes
+  become_method: "sudo"
   pre_tasks:
     - { include: roles/ec2/tasks/setup_boto.yml, tags: [ 'provisioning', 'setupboto' ] }
     - { include: roles/ec2/tasks/create_vpc.yml, tags: [ 'provisioning', 'createvpc' ] }
     - { include: roles/ec2/tasks/create_subnet.yml, tags: [ 'provisioning', 'createsubnet' ] }
     - { include: roles/ec2/tasks/create_security_group.yml, tags: [ 'provisioning', 'createsg'] }
   roles:
-      - { role: ec2 }
+      - { role: ec2, tags: [ 'provisioning' ] }
+
+- name: Setup common tasks for server provisioning
+  hosts: webserver
+  gather_facts: true
+  become: yes
+  become_method: sudo
+#  pre_tasks:
+#  #    - { include: roles/jenkin/tasks/yum_update_cache.yml, tags: [ 'cache' ] }
+  roles:
+      - { role: common }
+
 
 
