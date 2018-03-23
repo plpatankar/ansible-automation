@@ -1,0 +1,5 @@
+---
+- name: pack the weblogic domain
+  shell: "{{ weblogic_pack_path }} -domain={{ weblogic_domain }} -template={{ weblogic_template }} -template_name={{ weblogic_template_name }}"
+
+   

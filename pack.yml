@@ -1,0 +1,4 @@
+---
+- hosts: weblogicserver-source
+  roles:
+     - pack
