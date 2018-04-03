@@ -18,8 +18,13 @@
     src: ora_inst.loc.j2
     dest: "/etc/oraInst.loc"
 
+- name: Install java openjdk-devel
+  yum: 
+    name: java-1.8.0-openjdk-devel
+    state: present
+
 - name: copy weblogic jarfile
   copy:
-    src: /etc/ansible/roles/weblogic/files/weblogic.jar
+    src: "{{ oracle_weblogic_jar }}"
     dest: /opt/oracleweb/weblogic.jar
     mode:  0755

@@ -1,4 +1,7 @@
 ---
-- hosts: weblogicserver
+- name: Install weblogic server
+  hosts: weblogicserver
+  become: yes
+  become_method: sudo
   roles:
-     - weblogic
+     - { role: weblogic }

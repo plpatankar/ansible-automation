@@ -19,6 +19,7 @@ installer_archives:
   - "linuxamd64_12102_database_2of2.zip"
 
 oracle_install_version: "12102"
+db_install_rsp_template: "db_install.rsp.j2"
 dbhome_name: "dbhome_1"
 oracle_edition: "EE"
 oracle_dba_group: dba

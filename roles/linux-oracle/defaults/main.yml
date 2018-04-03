@@ -21,6 +21,17 @@ packages_list:
   - sysstat
   - unixODBC
   - unzip
+# for 11gR2
+  - xclock 
+  - oracle-rdbms-server-11gR2-preinstall
+  - unixODBC-devel.i686 
+  - unixODBC-devel.x86_64
+  - unixODBC.i686
+  - unixODBC.x86_64
+  - elfutils-devel.x86_64
+# ASM Libraries
+  - oracleasm-support
+  - kmod-oracleasm
 kernel_params:
 # Shared memory and semaphore
 # look for document 226209.1 in oracle support for details
