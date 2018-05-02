@@ -1,0 +1,4 @@
+weblogic_domain: /home/adminadmin/Oracle/Middleware/user_projects/domains/base_domain
+weblogic_template: /home/adminadmin/Oracle/Middleware/user_templates/base_domain.jar
+weblogic_template_name: base_domain
+weblogic_pack_path: /home/adminadmin/Oracle/Middleware/wlserver_10.3/common/bin/pack.sh

@@ -1,0 +1,8 @@
+---
+- name:Copy the template
+  copy:
+    src: {{ template_source_path }}
+    dest: {{ weblogic_template }}
+
+- name: unpack the weblogic domain
+  shell: "{{ weblogic_unpack_path }} -template={{ weblogic_template }} -domain={{ weblogic_domain }}"

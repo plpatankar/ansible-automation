@@ -130,6 +130,25 @@ ansible-playbook -i inventory/hosts.ini setup_ssh.yml --private-key=Key001.pem -
 
 ```
 
+### oracledb-ansible
+Ansible playbook to configure a CentOS/RHEL/Oracle Linux 7 server with Oracle 12c R1 Enterprise Edition Database
+
+## To run the playbook you need to:
+
+Download from Oracle support the Oracle installation files:
+
+```
+
+- linuxamd64_12102_database_1of2.zip
+- linuxamd64_12102_database_1of2.zip
+
+```
+
+and put them to folder roles/oracle-install/files inside checkout folder
+
+https://<Oracle_host>:5500/em
+
+
 ## Authors
 
 * **Prashant Patankar** - *Initial work* and updates - [plpatankar](https://github.com/plpatankar)

@@ -1,0 +1,14 @@
+---
+# vars file for ansible-oracle-wls
+oracle_weblogic_user: oracleweb
+oracle_weblogic_group: webinstall
+oracle_weblogic_user_home: /opt/oracleweb
+
+oracle_weblogic_oracle_home: /opt/oracleweb/product/oracle_home
+oracle_weblogic_wls_home: "{{ oracle_weblogic_oracle_home }}/wlserver"
+
+oracle_weblogic_inventory_directory: /opt/oracleweb/inventory
+
+oracle_weblogic_response_file: "{{ oracle_weblogic_user_home }}/wls.rsp"
+
+oracle_weblogic_already_installed: false

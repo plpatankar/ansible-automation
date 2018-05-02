@@ -1,0 +1,4 @@
+---
+- hosts: weblogicserver-destination
+  roles:
+     - unpack
