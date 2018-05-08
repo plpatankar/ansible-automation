@@ -1,0 +1,7 @@
+---
+- name: Install oracle http server
+  hosts: ohsserver
+  become: yes
+  become_method: sudo
+  roles:
+     - { role: oracle-http }

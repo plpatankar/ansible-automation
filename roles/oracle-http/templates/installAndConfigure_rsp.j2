@@ -1,0 +1,57 @@
+[ENGINE]
+ 
+#DO NOT CHANGE THIS.
+Response File Version=1.0.0.0.0
+ 
+[GENERIC]
+
+#Set this to true if you wish to skip software updates
+DECLINE_AUTO_UPDATES=true
+DECLINE_SECURITY_UPDATES=true
+SKIP_SOFTWARE_UPDATES=true
+SPECIFY_DOWNLOAD_LOCATION=/opt/ohs
+ 
+#Set this to true if installation and configuration need to be done, all other required variables need to be provided. Variable "INSTALL AND CONFIGURE LATER TYPE" must be set to false if this is set to true as the variables are mutually exclusive
+INSTALL AND CONFIGURE TYPE=true
+ 
+#Set this to true if only Software only installation need to be done. If this is set to true then variable "INSTALL AND CONFIGURE TYPE" must be set to false, since the variables are mutually exclusive.
+INSTALL AND CONFIGURE LATER TYPE=false
+
+MIDDLEWARE_HOME=/opt/ohs/Middleware
+
+#Provide the Oracle Home location. The Oracle Home directory name may only contain alphanumeric , hyphen (-) , dot (.) and underscore (_) characters, and it must begin with an alphanumeric character. The total length has to be less than or equal to 128 characters. The location has to be an empty directory or a valid Web Tier Oracle Home.
+ORACLE_HOME=/opt/ohs/Middleware/Oracle_WT1
+ 
+#The name of the Oracle Instance. Instance name must begin with an alphabetic character, may only contain alphanumeric characters, or the underscore (_) or hyphen (-) characters and are 4 to 30 characters long.
+INSTANCE_HOME=/opt/ohs/Middleware/Oracle_WT1/instances/instance1
+ 
+#Provide the Oracle Instance location. The Oracle Instance directory name may only contain alphanumeric , hyphen (-) , dot (.) and underscore (_) characters, and it must begin with an alphanumeric character. The total length has to be less than or equal to 128 characters. The location has to be an empty or non existing directory.
+INSTANCE_NAME=instance1
+ 
+#If set to true, installer will auto assign ports
+AUTOMATIC_PORT_DETECT=false
+ 
+#This is required if "AUTOMATIC_PORT_DETECT" variable is set to false, absolute path of a staticports file location need to be provided with values for ports.\nThe template for staticports.ini can be found from Disk1/staget/Response directory of the shiphome.
+STATICPORT INI FILE LOCATION=/opt/ohs/binaries/ohs_patchset/Disk1/stage/Response/staticports.ini
+ 
+ 
+[SYSTEM]
+ 
+#Set true to create a new instance and configure Oracle Process Management Notification, else skip the configuration
+CONFIGURE_OPMN=true
+ 
+#Set true to configure Oracle HTTP Server, else skip Oracle HTTP Server configuration
+CONFIGURE_OHS=true
+ 
+#Set true to configure Oracle Web Cache, else skip Oracle Web Cache configuration
+CONFIGURE_WEBCACHE=false
+ 
+#The Oracle HTTP Server (OHS) component name (required only if CONFIGURE_OHS is set to true). OHS component name must begin with an alphabetic character, may only contain alphanumeric characters, or the underscore (_) or hyphen (-) characters and are 4 to 30 characters long.
+OHS_COMPONENT_NAME=ohs1
+ 
+[APPLICATIONS]
+ 
+[RELATIONSHIPS]
+ 
+#If set to true, the instance and components will be registered with an existing weblogic server
+ASSOCIATE_WEBTIER_WITH_DOMAIN=false

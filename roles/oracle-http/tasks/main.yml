@@ -1,0 +1,72 @@
+---
+
+- name: create weblogic group
+  group:
+    name: "{{ oracle_weblogic_group }}"
+    state: present
+
+- name: create weblogic user
+  user:
+    name: "{{ oracle_weblogic_user }}"
+    group: "{{ oracle_weblogic_group }}"
+    createhome: yes
+    home: "{{ oracle_weblogic_user_home }}"
+    state: present
+
+- name: create directories required
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ oracle_weblogic_user }}"
+    group: "{{ oracle_weblogic_group }}"
+    mode: 0755
+  with_items: 
+    - "{{ ohs_binaries }}"
+    - "{{ ohs_inventory }}"
+
+- name: copy OHS installer
+  copy:
+    src: "{{ ohs_installer_zip }}"
+    dest: "{{ ohs_binaries }}"
+    mode:  0755
+
+- name: Extract OHS installer 
+  unarchive:
+    src: "{{ ohs_installer_zip }}"
+    dest: "{{ ohs_binaries }}"
+  become: true
+  become_user: "{{ oracle_weblogic_user }}"
+
+
+- name: generate invPtrLoc file
+  template:
+    src: ohs_invPtrLoc.j2
+    dest: "{{ ohs_inventory }}/oraInst.loc"
+  become: true
+  become_user: "{{ oracle_weblogic_user }}"
+
+
+- name: generate staticports config file
+  template:
+    src: staticports_ini.j2
+    dest: "{{ ohs_staticports_ini }}/staticports.ini"
+  become: true
+  become_user: "{{ oracle_weblogic_user }}"
+
+
+
+- name: generate response file for silent installer
+  template:
+    src: installAndConfigure_rsp.j2
+    dest: "{{ ohs_binaries }}/installAndConfigure.rsp"
+  become: true
+  become_user: "{{ oracle_weblogic_user }}"
+
+
+- name: install OHS 
+  shell: "{{ ohs_binaries }}/ohs_patchset/Disk1/runInstaller -silent -response {{ ohs_binaries }}/installAndConfigure.rsp -invPtrLoc {{ ohs_inventory }}/oraInst.loc"
+  become: true
+  become_user: "{{ oracle_weblogic_user }}"
+
+
+

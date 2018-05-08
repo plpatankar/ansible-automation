@@ -1,0 +1,12 @@
+---
+
+oracle_weblogic_group: "oracle"
+oracle_weblogic_user: "weblogic"
+oracle_weblogic_user_home: "/opt/oracleweb"
+ohs_binaries: "/opt/ohs/binaries"
+ohs_inventory: "/opt/ohs/inventory"
+
+# installer is expected to be kept at ansible role file path 
+ohs_installer_zip: "{{ role_path }}/files/V31902-01.zip"
+ohs_staticports_ini: "{{ ohs_binaries }}/ohs_patchset/Disk1/stage/Response"
+
