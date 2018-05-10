@@ -1,5 +1,13 @@
 ---
 
+- name: Check if OHS installed already
+  shell: "! $(find / -name opmnctl 2>/dev/null| grep -wq opmnctl)"
+  register: ohs_installed
+  
+#- fail: 
+#    msg: "Oracle HTTP server already installed"
+#  when: ohs_installed is defined and ohs_installed.rc == 0
+
 - name: create weblogic group
   group:
     name: "{{ oracle_weblogic_group }}"
@@ -64,7 +72,7 @@
 
 
 - name: install OHS 
-  shell: "{{ ohs_binaries }}/ohs_patchset/Disk1/runInstaller -silent -response {{ ohs_binaries }}/installAndConfigure.rsp -invPtrLoc {{ ohs_inventory }}/oraInst.loc"
+  shell: "{{ ohs_binaries }}/ohs_patchset/Disk1/runInstaller -waitforcompletion -silent -response {{ ohs_binaries }}/installAndConfigure.rsp -invPtrLoc {{ ohs_inventory }}/oraInst.loc"
   become: true
   become_user: "{{ oracle_weblogic_user }}"
 
