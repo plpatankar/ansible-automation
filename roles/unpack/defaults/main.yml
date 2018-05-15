@@ -1,4 +1,5 @@
-weblogic_template: mwdomain.jar #put your own path and jar name
+oracle_weblogic_user: oracleweb
+weblogic_template: /tmp/mwdomain.jar #put your own path and jar name
 weblogic_domain: /opt/oracleweb/mwdomain #put your own path and domain name
-template_source_path: mwdomain.jar #put the source path of the weblogic domain template 
-weblogic_unpack_path: /opt/oracleweb # put the path of te unpac.sh utility from the destination server
+template_source_path: files/mwdomain.jar #put the source path of the weblogic domain template 
+weblogic_unpack_path: /opt/oracleweb/product/oracle_home/wlserver/common/bin # put the path of te unpack.sh utility from the destination server
