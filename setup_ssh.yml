@@ -13,6 +13,16 @@
     become: yes
     become_method: "sudo"
 
+  - name: Create ssh directory
+    file: 
+      path: "/home/{{ createuser }}/.ssh"
+      state: directory
+      mode: 0700
+      owner: "{{ createuser }}"
+      group: "{{ createuser }}"
+    become: yes
+    become_method: "sudo"
+
   - name: Setup | authorized key upload
     authorized_key: 
       user: "{{ createuser }}"
