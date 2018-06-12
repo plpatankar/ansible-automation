@@ -5,14 +5,17 @@
 
 - name: Create folder for installation files
   file: state=directory path={{ installation_folder }}
+
 #  Copy installer files
 - name: Copy installer files
-  copy: src={{ item }} dest='{{ installation_folder }}/'
+  synchronize: src={{ item }} dest='{{ installation_folder }}/'
   with_items: '{{ installer_archives }}'
 
-#  extract files
 - name: Extract installation files
-  command: 'unzip {{ installation_folder }}/{{ item }} -d {{ installation_folder }}/'
+  unarchive:
+     src: "{{ installation_folder }}/{{ item }}"
+     dest: "{{ installation_folder }}/"
+     remote_src: yes
   with_items: '{{ installer_archives }}'
 
 #  generate response file
@@ -74,19 +77,13 @@
   command: 'chkconfig --add oradb'
   become_user: root
 
-# You can remove it for non vagrant server.
-#- name: reboot vagrant virtual machine
-#  local_action: shell vagrant reload
-#  sudo_user: '{{ host_username }}'
-#  ignore_errors: yes
-#  tags:
-#    - reboot-vagrant
-
 - name: Create trigger for autostart pluggable db's
   copy: src=start-pluggable-dbs.sh dest={{ installation_folder }}/ mode=755
   tags:
     - start-pluggable
+  when: oracle_install_version is defined and oracle_install_version == '12102'
 
 - shell: '{{ installation_folder }}/start-pluggable-dbs.sh'
   tags:
     - start-pluggable
+  when: oracle_install_version is defined and oracle_install_version == '12102'

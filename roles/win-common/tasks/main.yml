@@ -1,0 +1,11 @@
+---
+
+- name: Ensure users present
+  win_user: 
+     name: "{{ item.name }}"
+     password: "{{ item.pwd }}"
+     state: present
+     groups: "{{ item.group }}"
+  with_items: "{{ common_users }}"
+     
+

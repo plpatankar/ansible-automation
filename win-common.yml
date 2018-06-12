@@ -1,0 +1,7 @@
+---
+
+- name: Windows ping
+  hosts: win
+  roles:
+    - win-common
+      

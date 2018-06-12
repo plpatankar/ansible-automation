@@ -1,3 +1,6 @@
 *.pem
 *.retry
 roles/oracle-install/files/*.zip
+roles/oracle-http/files/*.zip
+roles/unpack/files/*.jar
+roles/weblogic/files/*.jar

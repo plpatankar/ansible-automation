@@ -618,7 +618,10 @@ WALLETPASSWORD= {{ oracle_pass_all_users }}
 # Default value : FASLE
 # Mandatory     : No
 #-----------------------------------------------------------------------------
+#SAMPLESCHEMA={{ oracle_install_samples }}
+{% if oracle_install_samples is defined %}
 SAMPLESCHEMA={{ oracle_install_samples }}
+{% endif %}
 
 #-----------------------------------------------------------------------------
 # Name          : MEMORYPERCENTAGE
@@ -1079,7 +1082,7 @@ DB_UNIQUE_NAME = "orcl12c.us.oracle.com"
 # Default value : None
 # Mandatory     : Yes
 #-----------------------------------------------------------------------------
-NODENAME=
+#NODENAME=
 
 #-----------------------------------------------------------------------------
 # Name          : OBFUSCATEDPASSWORDS

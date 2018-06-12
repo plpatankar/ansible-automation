@@ -11,21 +11,27 @@ install_db: "INSTALL_DB_SWONLY"
 oracle_hostname: "abhijitoel"
 inventory_os_group: "oinstall"
 inventory_location: "/u01/app/oraInventory"
-oracle_home: "/u01/app/oracle/product/11.2.0/dbhome_1"
 oracle_base: "/u01/app/oracle"
+oracle_user: "oracle"
+oracle_install_version: "11.2.0"
+dbhome_name: "dbhome_1"
 oracle_edition: "EE"
 oracle_dba_group: "dba"
 oracle_oper_group: "oinstall"
 oracle_database_type: "GENERAL_PURPOSE"
-oracle_globalname: ""
-oracle_sid: ""
-oracle_charset: ""
 oracle_memory_option: "false"
-oracle_memory_mb: ""
 oracle_install_samples: "false"
-oracle_pass_all_users: ""
-oracle_storage_type: ""
-oracle_dataloc: ""
-oracle_recoveryloc: ""
-oracle_decline_security_updates: "true"
 db_install_rsp_template: "db_install.rsp_11gR2.j2"
+
+##  dbca.rsp template varaibles
+oracle_globalname: TESTDB
+oracle_sid: ORCL
+create_container_database: TESTDB
+number_of_pdbs: 1
+pdb_prefix: PDB1
+oracle_pass_all_users: oracle123
+oracle_dataloc: /u01/app/oracle/oradata/
+oracle_recoveryloc: /u01/app/oracle/oradata/
+oracle_charset: AL32UTF8
+#oracle_install_samples: ""
+oracle_memory_mb: 1024

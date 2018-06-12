@@ -2,7 +2,6 @@ install_db: INSTALL_DB_SWONLY
 oracle_hostname: '{{ server_hostname }}'
 inventory_os_group: '{{ oracle_install_group }}'
 inventory_location: '{{ oracle_base }}/inventory'
-oracle_home: '{{ oracle_base }}/{{ oracle_user }}/product/{{ oracle_install_version }}/{{ dbhome_name }}'
 
 installation_folder: '{{ oracle_base}}/installation'
 server_hostname: '{{ ansible_fqdn }}'
@@ -43,6 +42,7 @@ oracle_storage_type: "FILE_SYSTEM_STORAGE"
 oracle_dataloc: "{{ oracle_base }}/oradata"
 oracle_recoveryloc: "{{ oracle_base }}/recovery_area"
 oracle_decline_security_updates: "True"
+oracle_home: '{{ oracle_base }}/{{ oracle_user }}/product/{{ oracle_install_version }}/{{ dbhome_name }}'
 hugepages_nr: 578
 
 

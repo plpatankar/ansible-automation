@@ -1,0 +1,9 @@
+---
+
+common_users:
+    - name: ansible
+      pwd: "{{ ansible_pwd }}"
+      group: Administrators
+    - name: tquila
+      pwd: "{{ tquila_pwd }}"
+      group: Administrators
